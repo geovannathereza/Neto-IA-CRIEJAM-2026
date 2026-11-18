@@ -24,3 +24,5 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+# Neto-IA-CRIEJAM-2026
+
