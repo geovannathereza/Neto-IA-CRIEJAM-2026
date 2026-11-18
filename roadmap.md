@@ -1,0 +1,16 @@
+# Neto
+- [x] Aplicar documento: Meus direitos nos seis golpes, links condicionais e navegação.
+- [x] Aplicar Lexend, botões de 64px e leitura de 20/24/28px; 26 testes passaram e direitos, retorno, celular e painel foram conferidos na prévia.
+- [x] Versão 2: menu com 4 opções, teste rápido de golpe, golpe do processo, rede de ajuda e cartões de passos.
+- [x] Abrir com letras grandes, destacar Ouvir e organizar orientações em passos curtos; verificado na conversa.
+- [x] Modo escuro selecionável e letras ampliadas para leitura, incluindo opções e avisos.
+- [x] Botão fixo para voltar ao menu principal preservando mensagens; retirar opções de falar com pessoa.
+- [x] Gravar áudio, transcrever sem guardar o arquivo e enviar o texto sanitizado à IA; testar o fluxo.
+- [x] Aplicar prioridade 1 do documento: identidade TJPE, abertura, direitos sem repetição, retirada do PDF e revisão dos textos.
+- [x] Conversa acessível e conteúdo aprovado dos cinco golpes.
+- [x] IA com remoção de dados sensíveis.
+- [x] Agendamento persistente e compartilhamento com família.
+- [x] Login e painel ao vivo da equipe implementados.
+- [x] Testes de regras e verificação das telas públicas.
+- [ ] Verificar painel autenticado: depende de uma conta cadastrada e autorizada como equipe.- [x] Imprimir resumo e avisar familiar
+- [x] Piloto v2: novos fluxos, verificador, relato, teste, canais, alertas, painel de exemplo

@@ -1,0 +1,18 @@
+CREATE TABLE public.user_roles (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE, role text NOT NULL CHECK (role = 'equipe'), UNIQUE(user_id,role));
+GRANT SELECT ON public.user_roles TO authenticated;
+GRANT ALL ON public.user_roles TO service_role;
+ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY own_role ON public.user_roles FOR SELECT TO authenticated USING (user_id=auth.uid());
+CREATE FUNCTION public.is_equipe() RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path=public AS $$ SELECT EXISTS(SELECT 1 FROM public.user_roles WHERE user_id=auth.uid() AND role='equipe') $$;
+REVOKE ALL ON FUNCTION public.is_equipe() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_equipe() TO authenticated;
+CREATE TABLE public.atendimentos (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), codigo text NOT NULL UNIQUE CHECK (codigo ~ '^NJ-[0-9]{5}$'), codigo_seguranca text NOT NULL CHECK (codigo_seguranca ~ '^[0-9]{4}$'), assunto text NOT NULL CHECK (length(assunto)<=100), perguntas text[] NOT NULL DEFAULT '{}' CHECK (cardinality(perguntas)<=3), horario timestamptz NOT NULL, status text NOT NULL DEFAULT 'aguardando' CHECK (status IN ('aguardando','confirmado','em_atendimento','concluido')), criado_em timestamptz NOT NULL DEFAULT now());
+GRANT INSERT ON public.atendimentos TO anon;
+GRANT SELECT,INSERT,UPDATE ON public.atendimentos TO authenticated;
+GRANT ALL ON public.atendimentos TO service_role;
+ALTER TABLE public.atendimentos ENABLE ROW LEVEL SECURITY;
+CREATE POLICY public_insert ON public.atendimentos FOR INSERT TO anon,authenticated WITH CHECK (status='aguardando');
+CREATE POLICY equipe_read ON public.atendimentos FOR SELECT TO authenticated USING (public.is_equipe());
+CREATE POLICY equipe_update ON public.atendimentos FOR UPDATE TO authenticated USING (public.is_equipe()) WITH CHECK (public.is_equipe());
+CREATE INDEX atendimentos_criado_idx ON public.atendimentos(criado_em DESC);
+ALTER PUBLICATION supabase_realtime ADD TABLE public.atendimentos;
