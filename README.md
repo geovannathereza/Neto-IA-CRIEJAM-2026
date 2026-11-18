@@ -48,19 +48,21 @@ O protótipo foi desenvolvido com o [Lovable](https://lovable.dev), plataforma d
 
 ```bash
 # 1. Clone o repositório
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/geovannathereza/Neto-IA-CRIEJAM-2026
 
 # 2. Acesse a pasta do projeto
-cd <NOME_DO_PROJETO>
+cd Neto-IA-CRIEJAM-2026
 
 # 3. Instale as dependências
-npm install
+npm install -g bun
+bun install
 
-# 4. Inicie o servidor de desenvolvimento
-npm run dev
+# 4. Inicie o localhost
+bun run dev
+
 ```
 
-Depois, acesse o endereço exibido no terminal (normalmente `http://localhost:5173`).
+Depois, acesse o endereço exibido no terminal (normalmente `http://localhost:8080/`).
 
 ## 🌐 Acesso ao protótipo
 
